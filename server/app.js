@@ -46,10 +46,18 @@ app.post("/register" , (request , response) => {
            result
          })
        }).catch((error) => {
-         response.status(400).send({
-           message : "failed to create the user",
-           error
-         })
+         if(error.keyPattern.email === 1){
+            response.status(400).send({
+              message : "Email is already taken",
+              error
+            })
+         }else{
+          response.status(400).send({
+            message : "Failed to register the user",
+            error
+          })
+         }
+         
        })
     }).catch( (error) => {
       console.log("password was not hashed succcessfully")
