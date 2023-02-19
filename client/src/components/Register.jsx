@@ -1,7 +1,7 @@
 import { Button, InputLabel, Typography  } from '@mui/material';
 import axios from "axios"
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
 import { StyledBox , StyledContainer , StyledInput } from '../assets/muithemes';
 
 const Register = () => {
@@ -130,7 +130,7 @@ const Register = () => {
                                 
                                 <div>
                                     <Button variant ="contained" type = "submit">Register</Button> 
-                                    <Typography>Not a user? <span onClick = {e => navigate("/login")}>Login here </span></Typography>
+                                    <Typography>Existing user?<Link to="/login">Login here</Link></Typography>
                                 </div>
                             </form>
                         </StyledBox>

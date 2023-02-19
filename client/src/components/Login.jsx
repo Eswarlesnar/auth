@@ -1,5 +1,5 @@
 import { Button, InputLabel, Typography  } from '@mui/material';
-import {useNavigate} from "react-router-dom"
+import {useNavigate , Link} from "react-router-dom"
 import {useState} from "react"
 import axios from "axios"
 import Cookies from "universal-cookie";
@@ -94,7 +94,7 @@ const Login = () => {
                                 }
                                 <div>
                                     <Button variant ="contained" type ="submit">Login</Button> 
-                                    <span onClick = {e => navigate("/register")}><Typography>Register</Typography></span>
+                                    <Typography>Not a user? <Link to ="/register">Register here</Link></Typography>
                                 </div>
                             </form>
                         </StyledBox>
