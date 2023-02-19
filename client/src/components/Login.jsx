@@ -2,6 +2,7 @@ import { Button, InputLabel, Typography  } from '@mui/material';
 import {useNavigate} from "react-router-dom"
 import {useState} from "react"
 import axios from "axios"
+import Cookies from "universal-cookie";
 import { StyledBox , StyledContainer , StyledInput } from '../assets/muithemes';
 
 
@@ -11,7 +12,7 @@ const Login = () => {
     const [loginSuccessfull , setLoginSuccessful] = useState(false)
     const [email , setEmail] = useState("")
     const [password ,  setPassword] = useState("")
-
+    const cookies = new Cookies();
     const handleLogin = (e) => {
         e.preventDefault()
         setIsSubmitted(true)
@@ -36,6 +37,11 @@ const Login = () => {
               .then(function (response) {
                 console.log(response);
                 // navigate("/login")
+                console.log(response)
+                cookies.set("TOKEN", response.data.token, {
+                    path: "/",
+                  });
+          
                 setLoginSuccessful(true)
                 setTimeout( () => {
                     navigate("/")
