@@ -1,6 +1,6 @@
 import Cookies from "universal-cookie";
 import { Navigate } from "react-router-dom";
-import Login from "./Login";
+
 
 const cookies = new Cookies();
 
