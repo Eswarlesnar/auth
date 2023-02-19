@@ -2,6 +2,7 @@
 import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import { Button } from '@mui/material';
 // import { Paper } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -33,5 +34,13 @@ export const StyledInput = styled(Input)(({theme}) => ({
     height :40,
     padding :"0.5rem",
     marginBottom : "15px"
+}))
+
+
+export const StyledFormButton = styled(Button)(({theme}) => ({
+    width : "305", 
+    height : "30",
+    padding : "0.5rem",
+    marginTop : "10px"
 }))
 

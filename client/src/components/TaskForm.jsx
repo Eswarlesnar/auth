@@ -1,7 +1,7 @@
 import { useState  , useContext} from "react";
-import {  StyledInput } from '../assets/muithemes';
+import {  StyledInput , StyledFormButton} from '../assets/muithemes';
 import {
-    Button,
+    Paper,
     InputLabel 
 } from "@mui/material";
 import { nanoid } from 'nanoid'
@@ -39,9 +39,9 @@ const TaskForm = () => {
        }
     }
 
-    return <>
+    return <Paper elevation={3} sx={{ padding: "30px" , display : "flex" , justifyContent : "center" , width : "300px"}}>
 
-        <form onSubmit =  {handleAddTask}>
+        <form onSubmit =  {handleAddTask} style ={{display : "flex" , flexDirection : "column"}}>
            <InputLabel htmlFor ="name">
                 Task Name:
             </InputLabel>
@@ -69,9 +69,9 @@ const TaskForm = () => {
                 value = {status}
                 onChange = { e => setStatus(e.target.value)}                
             />
-            <Button variant = "contained" type = "submit">Add task</Button>
+            <StyledFormButton variant = "contained" type = "submit" sx ={{width : "300px"}}>Add task</StyledFormButton>
         </form>
-    </>
+    </Paper>
 }
 
 export default TaskForm

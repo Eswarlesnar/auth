@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { taskContext } from "./Dashboard";
+import EditTask from "./EditTask";
 
 
 function TaskPaper({ task }) {
@@ -66,7 +67,7 @@ function TaskPaper({ task }) {
                     horizontal: 'left',
                     }}
                 >
-                    Edit code goes here
+                   <EditTask task = {task} closePopOver = {handlePopoverClose}/>
                 </Popover>
                 <Button variant= "contained" onClick = {handleDelete}>Delete</Button>
             </Box>
