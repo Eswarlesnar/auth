@@ -46,7 +46,7 @@ app.post("/register" , (request , response) => {
            result
          })
        }).catch((error) => {
-         if(error.keyPattern.email === 1){
+         if(error.keyPattern?.email === 1  || ""){
             response.status(400).send({
               message : "Email is already taken",
               error
@@ -57,7 +57,6 @@ app.post("/register" , (request , response) => {
             error
           })
          }
-         
        })
     }).catch( (error) => {
       console.log("password was not hashed succcessfully")

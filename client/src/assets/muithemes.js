@@ -66,9 +66,9 @@ export const StyledPaperFormContainer = styled(Paper)((theme) => ({
 
 
 export const StyledPaperTask = styled(Paper)(({theme}) => ({
-    padding: "10px",
     display: "flex",
     width : "700px",
+    padding : "10px 20px",
     flexWrap: "wrap", 
     justifyContent : "space-between", 
     gap: "20px" , margin : "3rem",

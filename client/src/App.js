@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function App() {
   return (
     <StyledContainer>
-      <StyledPaperForm elevation = {3}>
+      <StyledPaperForm elevation = {2}>
         <Typography variant ="h3">Welcome </Typography>
         <Typography variant= "body2">This page is available for everyone</Typography>
         <Typography variant= "body2">But the dashboard page is protected and only authenticated  users can access it</Typography>

@@ -20,11 +20,10 @@ const TaskForm = () => {
        e.preventDefault()
        setisTaskSaved(false)
        setisTaskSubmitted(true)
-       if(!name || !description || !status ){
+       if(!name.trim() || !description.trim() || !status.trim()){
           setTaskAddedSnackBarOpen(true)
           return
        }else{
-           
           let flag = false
           tasks.forEach(item => {
             if(item.task_name === name){
@@ -35,9 +34,9 @@ const TaskForm = () => {
           if(flag === false) {
             let task = {
                 task_id : nanoid(),
-                task_name : name , 
-                task_description : description,
-                task_status : status
+                task_name : name.trim() , 
+                task_description : description.trim(),
+                task_status : status.trim()
                }
                let tempTasks = [...tasks]
                tempTasks.push(task)

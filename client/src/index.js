@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import './index.css';
 import App from './App';
 import Login from './components/Login';
@@ -11,23 +12,28 @@ import TaskContextProvider from './contexts/taskContext';
 import AuthContextProvider from './contexts/authContext';
 
 
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <AuthContextProvider>
-       <Routes>
-          <Route path = "/" element = { <App /> } />
-          <Route path = "/login" element = { <Login /> } />
-          <Route path ="/register" element = { <Register /> }  />
-          <Route path = "/dashboard" element = { 
-             <ProtectedRoute>
-               <TaskContextProvider>
-                  <Dashboard />
-               </TaskContextProvider>
-             </ProtectedRoute>} 
-          />
-        </Routes>
+        <AnimatePresence  mode = "wait">
+          <Routes >
+              <Route path = "/" element = { <App /> } />
+              <Route path = "/login" element = { <Login /> } />
+              <Route path ="/register" element = { <Register /> }  />
+              <Route path = "/dashboard" element = { 
+                <ProtectedRoute>
+                  <TaskContextProvider>
+                      <Dashboard />
+                  </TaskContextProvider>
+                </ProtectedRoute>} 
+              />
+            </Routes>
+        </AnimatePresence>
        </AuthContextProvider>
     </Router>
   </React.StrictMode>
