@@ -71,7 +71,7 @@ app.post("/register" , (request , response) => {
        bcrypt.compare(request.body.password , user.password)
        .then((passwordMatched) => {
            if(!passwordMatched){
-             return response.statu(400).send({
+             return response.status(400).send({
                message : 'password is wrong'
              })
            }

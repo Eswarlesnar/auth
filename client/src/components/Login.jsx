@@ -1,9 +1,10 @@
-import { Button, InputLabel, Typography  } from '@mui/material';
+import { Button, InputLabel, Typography , Paper  } from '@mui/material';
 import {useNavigate , Link} from "react-router-dom"
-import {useState} from "react"
+import {useContext, useState} from "react"
 import axios from "axios"
 import Cookies from "universal-cookie";
-import { StyledBox , StyledContainer , StyledInput } from '../assets/muithemes';
+import { StyledPaperForm , StyledContainer , StyledInput, StyledFormButton } from '../assets/muithemes';
+import { authContext } from '../contexts/authContext';
 
 
 const Login = () => {
@@ -12,56 +13,67 @@ const Login = () => {
     const [loginSuccessfull , setLoginSuccessful] = useState(false)
     const [email , setEmail] = useState("")
     const [password ,  setPassword] = useState("")
+    const {loggedIn , setLoggedIn , handleLogout }  =  useContext(authContext)
+    const navigate = useNavigate()
     const cookies = new Cookies();
+    
     const handleLogin = (e) => {
         e.preventDefault()
         setIsSubmitted(true)
         setErrors("")
-        if(email){
+        if(email.trim().length ===  0){
+            setErrors("Enter Email")
+            return
+        }else{
             let validEmail = (/[\w-]+@([\w-]+\.)+[\w-]+/).test(email)
             if(validEmail === false){
                 setErrors("Email is not valid")
+                return
             }
         }
-        if(password.length < 5) {
+        if(password.trim().length < 5) {
             setErrors("Password should be more than 4 characters")
-        }
-
-        if(errors.length > 1) {
             return
-        }else{
-            axios.post('http://localhost:8080/login', {
-                email : email,
-                password :password
-              })
-              .then(function (response) {
-                console.log(response);
-                // navigate("/login")
-                console.log(response)
-                cookies.set("TOKEN", response.data.token, {
-                    path: "/",
-                  });
-          
-                setLoginSuccessful(true)
-                setTimeout( () => {
-                    navigate("/")
-                },1500)
-              })
-              .catch(function (error) {
-                 setErrors(error.response.data.message)
-              });
         }
+            
+        axios.post('http://localhost:8080/login', {
+                email : email.trim(),
+                password :password.trim()
+        })
+        .then(function (response) {
+            console.log(response);
+                // navigate("/login")
+            console.log(response)
+            cookies.set("TOKEN", response.data.token, {
+                    path: "/",
+            });
+          
+            setLoginSuccessful(true)
+            setLoggedIn(true)
+            navigate("/")
+        })
+        .catch(function (error) {
+            setErrors(error.response.data.message)
+        });
+        
     }
+   
+
+
     
-
-
-    const navigate = useNavigate()
-    return <>
-        <StyledContainer >
+    return <> 
+        {
+        loggedIn  ? 
+        <StyledContainer>
+            <StyledFormButton  variant = "contained" onClick = {() => handleLogout()}>Log out</StyledFormButton>
+        </StyledContainer> :
+        
+        <StyledContainer component = {Paper} >
                 <>
                         {
                           loginSuccessfull ?   <Typography>!!!Logged in  Successfullly</Typography> : 
-                          <StyledBox>
+
+                          <StyledPaperForm elevation = {3}>
                             <Typography variant='h4'>Login</Typography>
                             <form onSubmit = {handleLogin}>
                                 <InputLabel htmlFor ="email">
@@ -88,7 +100,8 @@ const Login = () => {
                                     setPassword(e.target.value)}}
                                 />
                                 {
-                                    (isSubmitted === true && errors.length > 1 ) && <Typography variant = "p" sx ={{color : "red"}}>{errors}</Typography>
+                                    (isSubmitted === true && errors.length > 1 ) && 
+                                    <Typography sx ={{color : "red" , fontSize : "0.9rem"}} variant = "body2">{errors}</Typography>
                                         
                                     
                                 }
@@ -97,11 +110,11 @@ const Login = () => {
                                     <Typography>Not a user? <Link to ="/register">Register here</Link></Typography>
                                 </div>
                             </form>
-                        </StyledBox>
+                        </StyledPaperForm>
                         }
                  </>
         </StyledContainer>
-
+      }
     </>
 }
 

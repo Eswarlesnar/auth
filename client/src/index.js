@@ -7,22 +7,28 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
+import TaskContextProvider from './contexts/taskContext';
+import AuthContextProvider from './contexts/authContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
+      <AuthContextProvider>
        <Routes>
           <Route path = "/" element = { <App /> } />
           <Route path = "/login" element = { <Login /> } />
           <Route path ="/register" element = { <Register /> }  />
           <Route path = "/dashboard" element = { 
              <ProtectedRoute>
-                <Dashboard />
+               <TaskContextProvider>
+                  <Dashboard />
+               </TaskContextProvider>
              </ProtectedRoute>} 
           />
-       </Routes>
+        </Routes>
+       </AuthContextProvider>
     </Router>
   </React.StrictMode>
 );

@@ -1,18 +1,18 @@
 import {
     Button,
-    Paper,
     Typography,
     Popover ,
     Box  
 } from "@mui/material";
 import { useContext, useState } from "react";
-import { taskContext } from "./Dashboard";
+import { StyledPaperTask } from "../assets/muithemes";
+import { taskContext } from "../contexts/taskContext";
 import EditTask from "./EditTask";
 
 
 function TaskPaper({ task }) {
     const { task_name: name, task_description: desc, task_status: status, task_id: id } = task;
-    const [tasks , setTasks] = useContext(taskContext)
+    const {tasks , setTasks} = useContext(taskContext)
     const [popoverAnchor , setPopoverAnchor] = useState(null)
 
     const handleEdit = (e) => {
@@ -42,7 +42,7 @@ function TaskPaper({ task }) {
 
     return <>
 
-        <Paper elevation={3} sx={{ padding: "10px", display: "flex", flexWrap: "wrap",  justifyContent : "space-between", gap: "20px" , margin : "3rem"}}>
+        <StyledPaperTask elevation={3}>
             <Box className = "content">
                 <Typography variant="h6" color="primary">
                     {name}
@@ -55,7 +55,7 @@ function TaskPaper({ task }) {
                 </Typography>
             </Box>
             
-            <Box classname = "actions" sx = {{ display : "flex" , flexDirection : "column" , gap:"5px"}}>
+            <Box className = "actions" sx = {{ display : "flex" , flexDirection : "column" , gap:"5px"}}>
                 <Button  aria-describedby={popoverid} variant="contained" onClick = {handleEdit}>Edit</Button>
                 <Popover
                     id={ popoverid }
@@ -71,7 +71,7 @@ function TaskPaper({ task }) {
                 </Popover>
                 <Button variant= "contained" onClick = {handleDelete}>Delete</Button>
             </Box>
-        </Paper>
+        </StyledPaperTask>
 
     </>;
 }

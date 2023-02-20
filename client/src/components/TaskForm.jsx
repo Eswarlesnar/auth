@@ -1,29 +1,36 @@
 import { useState  , useContext} from "react";
-import {  StyledInput , StyledFormButton} from '../assets/muithemes';
-import {
-    Paper,
-    InputLabel 
-} from "@mui/material";
+import {  StyledInput , StyledFormButton , StyledPaperFormContainer} from '../assets/muithemes';
+import { InputLabel } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
 import { nanoid } from 'nanoid'
-import {taskContext } from "./Dashboard"
+import { taskContext } from "../contexts/taskContext";
+import AlertSnackBar from "./Snackbar";
 
 const TaskForm = () => {
    
-    const [tasks , setTasks] = useContext(taskContext)
+    const {tasks , setTasks} = useContext(taskContext)
     const [name , setName]  = useState("")
     const [description , setDescription]  = useState("")
     const [status , setStatus]  = useState("")
+    const [isTaskSubmitted , setisTaskSubmitted]  = useState(false)
+    const [isTaskSaved , setisTaskSaved] = useState(false)
+    const [taskAddedSnackBarOpen , setTaskAddedSnackBarOpen] = useState(false)
     
     const handleAddTask = (e) =>{ 
        e.preventDefault()
+       setisTaskSaved(false)
+       setisTaskSubmitted(true)
        if(!name || !description || !status ){
+          setTaskAddedSnackBarOpen(true)
           return
        }else{
+           
           let flag = false
           tasks.forEach(item => {
             if(item.task_name === name){
                 flag = true
             }
+            setTaskAddedSnackBarOpen(true)
           })
           if(flag === false) {
             let task = {
@@ -35,11 +42,22 @@ const TaskForm = () => {
                let tempTasks = [...tasks]
                tempTasks.push(task)
                setTasks(tempTasks)
+               setisTaskSaved(true)
+               setTaskAddedSnackBarOpen(true)
+               setName("")
+               setDescription("")
+               setStatus("")
+              
           }
        }
     }
 
-    return <Paper elevation={3} sx={{ padding: "30px" , display : "flex" , justifyContent : "center" , width : "300px"}}>
+
+    const handleSnackBarClose = () => {
+        setTaskAddedSnackBarOpen(false)
+    }
+
+    return <StyledPaperFormContainer elevation={3} >
 
         <form onSubmit =  {handleAddTask} style ={{display : "flex" , flexDirection : "column"}}>
            <InputLabel htmlFor ="name">
@@ -70,8 +88,16 @@ const TaskForm = () => {
                 onChange = { e => setStatus(e.target.value)}                
             />
             <StyledFormButton variant = "contained" type = "submit" sx ={{width : "300px"}}>Add task</StyledFormButton>
+            { 
+             <Snackbar open={taskAddedSnackBarOpen} autoHideDuration={3000} onClose={handleSnackBarClose}>
+                <AlertSnackBar onClose={handleSnackBarClose} severity= { (isTaskSubmitted && isTaskSaved) ?"success" :"warning"} sx={{ width: '100%' }} elevation = {6} variant = "filled">
+                    { (isTaskSubmitted && isTaskSaved)  ? "Task saved" : "Failed to save"}
+                </AlertSnackBar>
+            </Snackbar>
+            
+            }
         </form>
-    </Paper>
+    </StyledPaperFormContainer>
 }
 
 export default TaskForm

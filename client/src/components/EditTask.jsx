@@ -1,13 +1,12 @@
 import { useState, useContext } from "react"
 import {
-    Box,
     InputLabel 
 } from "@mui/material";
-import { taskContext } from "./Dashboard"
-import {  StyledInput , StyledFormButton } from '../assets/muithemes';
+import { taskContext } from "../contexts/taskContext";
+import {  StyledInput , StyledFormButton ,StyledPaperFormContainer } from '../assets/muithemes';
 
 const EditTask = ({task , closePopOver}) => {
-    const [tasks , setTasks] = useContext(taskContext)
+    const {tasks , setTasks}= useContext(taskContext)
     const [name , setName]  = useState(task.task_name)
     const [description , setDescription]  = useState(task.task_description)
     const [status , setStatus]  = useState(task.task_status)
@@ -42,7 +41,7 @@ const EditTask = ({task , closePopOver}) => {
        }
     }
     
-    return <Box sx = {{padding : "30px" , height : "auto"}}>
+    return <StyledPaperFormContainer elevation={3}>
         <form onSubmit =  {handleEditTask}  style ={{display : "flex" , flexDirection : "column"}}>
            <InputLabel htmlFor ="name">
                 Task Name:
@@ -73,7 +72,7 @@ const EditTask = ({task , closePopOver}) => {
             />
             <StyledFormButton variant = "contained" type = "submit">Done</StyledFormButton>
         </form>
-    </Box>
+    </StyledPaperFormContainer>
 }
 
 

@@ -1,13 +1,13 @@
 
 import { Typography } from '@mui/material';
 import './App.css';
-import { StyledBox, StyledContainer } from './assets/muithemes';
+import {  StyledContainer, StyledPaperForm } from './assets/muithemes';
 import { Link } from 'react-router-dom';
 
 function App() {
   return (
     <StyledContainer>
-      <StyledBox>
+      <StyledPaperForm elevation = {3}>
         <Typography variant ="h3">Welcome </Typography>
         <Typography variant= "body2">This page is available for everyone</Typography>
         <Typography variant= "body2">But the dashboard page is protected and only authenticated  users can access it</Typography>
@@ -16,7 +16,7 @@ function App() {
            <Link to = "/login">Login</Link>
            <Link to = "/register">Register</Link>
         </div>
-      </StyledBox>
+      </StyledPaperForm>
     </StyledContainer>
   );
 }
