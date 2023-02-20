@@ -48,7 +48,8 @@ const Dashboard  = () => {
       console.log(value)
   }, [tasks])
  
-  return  <Container sx ={{ display: "flex" , flexDirection : "column" , alignItems :"center",  gap : "100px" , padding :"100px", width : "100vw" , background : "#e0ffff"}}>
+  return ( 
+   <Container sx ={{ display: "flex" , flexDirection : "column" , alignItems :"center",  gap : "100px" , padding :"100px", width : "100vw" , background : "#e0ffff"}}>
         <TaskForm />
         <div>
        
@@ -58,7 +59,7 @@ const Dashboard  = () => {
            })
         }
         </div>
-    </Container> 
+    </Container> )
   
 };
 

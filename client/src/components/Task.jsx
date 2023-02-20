@@ -40,7 +40,8 @@ function TaskPaper({ task }) {
     }
 
 
-    return <>
+    return (
+    <>
 
         <StyledPaperTask elevation={3}>
             <Box className = "content">
@@ -73,7 +74,7 @@ function TaskPaper({ task }) {
             </Box>
         </StyledPaperTask>
 
-    </>;
+    </>)
 }
 
 export default TaskPaper

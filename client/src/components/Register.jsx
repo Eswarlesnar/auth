@@ -73,7 +73,8 @@ const Register = () => {
 
     }
     
-    return <>
+    return( 
+    <>
         <StyledContainer >
                 <>
                         {
@@ -142,7 +143,7 @@ const Register = () => {
                  </>
         </StyledContainer>
 
-    </>
+    </>)
 }
 
 export default Register

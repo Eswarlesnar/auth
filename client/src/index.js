@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
+import { BrowserRouter as Router , Route , Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './index.css';
 import App from './App';
@@ -13,6 +13,13 @@ import AuthContextProvider from './contexts/authContext';
 
 
 
+const FramerRouter = ({children}) => {
+   const location = useLocation()
+   return <Routes location = {location} key = {location.pathname}>
+        {children}
+   </Routes>
+
+}
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,7 +28,7 @@ root.render(
     <Router>
       <AuthContextProvider>
         <AnimatePresence  mode = "wait">
-          <Routes >
+          <FramerRouter >
               <Route path = "/" element = { <App /> } />
               <Route path = "/login" element = { <Login /> } />
               <Route path ="/register" element = { <Register /> }  />
@@ -32,7 +39,7 @@ root.render(
                   </TaskContextProvider>
                 </ProtectedRoute>} 
               />
-            </Routes>
+          </FramerRouter>
         </AnimatePresence>
        </AuthContextProvider>
     </Router>

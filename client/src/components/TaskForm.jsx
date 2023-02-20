@@ -56,7 +56,8 @@ const TaskForm = () => {
         setTaskAddedSnackBarOpen(false)
     }
 
-    return <StyledPaperFormContainer elevation={3} >
+    return (
+    <StyledPaperFormContainer elevation={3} >
 
         <form onSubmit =  {handleAddTask} style ={{display : "flex" , flexDirection : "column"}}>
            <InputLabel htmlFor ="name">
@@ -96,7 +97,7 @@ const TaskForm = () => {
             
             }
         </form>
-    </StyledPaperFormContainer>
+    </StyledPaperFormContainer>)
 }
 
 export default TaskForm
