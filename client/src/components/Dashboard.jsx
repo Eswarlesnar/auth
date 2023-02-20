@@ -49,17 +49,18 @@ const Dashboard  = () => {
   }, [tasks])
  
   return ( 
-   <Container sx ={{ display: "flex" , flexDirection : "column" , alignItems :"center",  gap : "100px" , padding :"100px", width : "100vw" , background : "#e0ffff"}}>
-        <TaskForm />
-        <div>
-       
-        { 
-          tasks.length > 0 && tasks?.map(item => {
-             return <TaskPaper key = {item.task_id} task = {item}/>
-           })
-        }
-        </div>
-    </Container> )
+    <main className="mainContainer">
+        <Container  sx ={{ display: "flex" , flexDirection : "column" , alignItems :"center",  gap : "100px" , padding :"100px" , background : "#e0ffff"}}>
+            <TaskForm />
+            <div>
+              { 
+                tasks.length > 0 && tasks?.map(item => {
+                  return <TaskPaper key = {item.task_id} task = {item}/>
+                })
+              }
+            </div>
+        </Container> 
+    </main>)
   
 };
 

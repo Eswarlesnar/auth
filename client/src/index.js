@@ -10,8 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
 import TaskContextProvider from './contexts/taskContext';
 import AuthContextProvider from './contexts/authContext';
-
-
+import Navbar from './components/Navbar';
 
 const FramerRouter = ({children}) => {
    const location = useLocation()
@@ -28,6 +27,7 @@ root.render(
     <Router>
       <AuthContextProvider>
         <AnimatePresence  mode = "wait">
+          <Navbar />
           <FramerRouter >
               <Route path = "/" element = { <App /> } />
               <Route path = "/login" element = { <Login /> } />
